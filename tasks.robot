@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation     Completes the Quarter Close challenge.
+Library           Collections
 Library           RPA.Browser.Playwright
 Library           RPA.Robocorp.Vault
-Library           Collections
 
 *** Tasks ***
 Complete the Quarter Close challenge
