@@ -14,10 +14,12 @@ The robot uses the [RPA.Browser.Playwright](https://robocorp.com/docs/libraries/
 
 ```robot
 *** Settings ***
-Documentation     Completes the Quarter Close challenge.
-Library           Collections
-Library           RPA.Browser.Playwright
-Library           RPA.Robocorp.Vault
+Documentation       Completes the Quarter Close challenge.
+
+Library             Collections
+Library             RPA.Browser.Playwright
+Library             RPA.Robocorp.Vault
+
 
 *** Tasks ***
 Complete the Quarter Close challenge
@@ -31,13 +33,14 @@ Complete the Quarter Close challenge
     Save transaction statuses    ${matched_transactions}
     Take a screenshot of the result
 
+
 *** Keywords ***
 Open the transaction review website
     New Context    userAgent=Chrome/100.0.4896.75
     ${transaction_page}=
     ...    New Page
     ...    https://developer.automationanywhere.com/challenges/automationanywherelabs-quarterclose.html
-    [Return]    ${transaction_page}
+    RETURN    ${transaction_page}
 
 Accept cookies
     Click    id=onetrust-accept-btn-handler
@@ -75,7 +78,7 @@ Get transactions
         ...    amount=${amount}
         Append To List    ${transactions}    ${transaction}
     END
-    [Return]    ${transactions}
+    RETURN    ${transactions}
 
 Match transactions
     [Arguments]    ${transactions}
@@ -84,7 +87,7 @@ Match transactions
         ${status}=    Search transaction and return status    ${transaction}
         Set To Dictionary    ${transaction}    status=${status}
     END
-    [Return]    ${transactions}
+    RETURN    ${transactions}
 
 Open the account page
     [Arguments]    ${transaction}
@@ -105,7 +108,7 @@ Search transaction and return status
     IF    ${transaction_found}
         ${status}=    Set Variable    Verified
     END
-    [Return]    ${status}
+    RETURN    ${status}
 
 Save transaction statuses
     [Arguments]    ${transactions}
